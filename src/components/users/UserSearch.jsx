@@ -3,7 +3,7 @@ import GithubContext from '../../context/github/GithubContext';
 
 function UserSearch() {
     const [text, setText] = useState('');
-    const {users, fetchUsers} = useContext(GithubContext);
+    const { users, fetchUsers, clearUsers } = useContext(GithubContext);
 
     const handleChange = (e) => setText(e.target.value);
 
@@ -13,11 +13,12 @@ function UserSearch() {
         if(text === '') {
             alert('Please enter something');
         } else {
-            // TODO: SearchUsers
             fetchUsers(text);
             setText('');
         }
     }
+
+    const handleClick = () => clearUsers();
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 mb-8 gap-8">
@@ -34,7 +35,7 @@ function UserSearch() {
             {/* Only show if users are being shown */}
             {users.length > 0 && (
                 <div>
-                    <button className="btn btn-ghost">Clear</button>
+                    <button onClick={handleClick} className="btn btn-ghost">Clear</button>
                 </div>
             )}
         </div>
