@@ -7,7 +7,7 @@ const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 export const GithubProvider = ({children}) => {
-    const initialState ={
+    const initialState = {
         users: [],
         loading: false
     };
@@ -19,14 +19,6 @@ export const GithubProvider = ({children}) => {
     const fetchUsers = async (text) => {
         setLoading();
         
-        // const response = await fetch(`${GITHUB_URL}/users`, {
-        //     headers: {
-        //         Authorization: `token ${GITHUB_TOKEN}`,
-        //     },
-        // })
-        // const data = await response.json();
-        // console.log(data, typeof data);
-
         const response = await fetch(`${GITHUB_URL}/search/users?q=${text}+in%3Alogin&type=Users`, {
             headers: {
                 Authorization: `token ${GITHUB_TOKEN}`,
