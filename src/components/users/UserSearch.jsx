@@ -6,7 +6,7 @@ import { fetchUsers } from '../../context/github/GithubActions';
 function UserSearch() {
     const [text, setText] = useState('');
 
-    const { users, dispatch, clearUsers } = useContext(GithubContext);
+    const { users, dispatch } = useContext(GithubContext);
     const { setAlert } = useContext(AlertContext);
 
     const handleChange = (e) => setText(e.target.value);
@@ -25,8 +25,6 @@ function UserSearch() {
         }
     }
 
-    const handleClick = () => clearUsers();
-
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 mb-8 gap-8">
             <form onSubmit={handleSubmit}>
@@ -42,7 +40,7 @@ function UserSearch() {
             {/* Only show if users are being shown */}
             {users.length > 0 && (
                 <div>
-                    <button onClick={handleClick} className="btn btn-ghost">Clear</button>
+                    <button onClick={() => dispatch({type: 'CLEAR_USERS'})} className="btn btn-ghost">Clear</button>
                 </div>
             )}
         </div>

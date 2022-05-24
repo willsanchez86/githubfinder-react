@@ -7,16 +7,28 @@ import { DiCodepen } from 'react-icons/di';
 import Spinner from '../components/shared/Spinner';
 import GithubContext from '../context/github/GithubContext';
 import ReposList from '../components/repos/ReposList';
+import { getUser, getUserRepos } from '../context/github/GithubActions';
 
 
 function User() {
-    const { user, loading, repos, getUser, getUserRepos } = useContext(GithubContext);
+    const { user, loading, repos, dispatch } = useContext(GithubContext);
 
     const params = useParams();
 
     useEffect(() => {
-      getUser(params.login);
-      getUserRepos(params.login);
+      dispatch({type: 'SET_LOADING'});
+      const getUserData = async () => {
+        const userData = await getUser(params.login);
+        dispatch({type: 'GET_USER', payload: userData});
+      }
+
+      const getRepoData = async () => {
+        const repoData = await getUserRepos(params.login);
+        dispatch({type: 'GET_REPOS', payload: repoData});
+      }
+
+      getUserData();
+      getRepoData();
     }, [])
 
     if(loading) {
