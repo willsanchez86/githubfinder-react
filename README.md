@@ -1,7 +1,4 @@
 # Github Finder
-
-https://githubfinder-react-mauve.vercel.app/
-
 ### Overview
 React Application which fetches data from the github API to search for user profiles and repositories. User data is rendered on appealing user profile pages that were styled using TailwindCss and DaisyUI.
 
